@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdk
+    buildToolsVersion rootProject.ext.buildTools
+    defaultConfig {
+        applicationId "xyz.kalinski.perform"
+        versionCode 1
+        versionName "2017.07.06"
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+    mavenCentral()
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.anko:anko-sdk15:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-support-v4:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-appcompat-v7:$rootProject.ankoVersion"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services:$rootProject.playService"
+
+    // Support Libraries
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibrary"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibrary"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibrary"
+    implementation "com.android.support:support-v13:$rootProject.supportLibrary"
+    implementation "com.android.support:support-v4:$rootProject.supportLibrary"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timber"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofit"
+    implementation ("com.squareup.retrofit2:converter-simplexml:$rootProject.simplexml"){
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptor"
+    implementation "com.squareup.moshi:moshi:$rootProject.moshi"
+    implementation "com.serjltt.moshi:moshi-lazy-adapters:$rootProject.moshiLazy"
+
+    // RxJava & RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid"
+
+    // Dagger 2
+    compile "com.google.dagger:dagger:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    provided "org.glassfish:javax.annotation:$rootProject.javax"
+
+    // Test
+    testImplementation "junit:junit:$rootProject.junit"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito"
+    testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrest"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espresso"
+}

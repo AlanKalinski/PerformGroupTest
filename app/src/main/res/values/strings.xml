@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">kotlin-repository</string>
+    <string name="response_error">%s Response Error</string>
+    <string name="call_error">%s Call Error</string>
+</resources>

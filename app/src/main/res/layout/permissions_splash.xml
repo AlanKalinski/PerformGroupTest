@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundWithAlpha"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/big_padding"
+        android:background="@color/background">
+
+        <RelativeLayout
+            android:id="@+id/mainContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/medium_image_size"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:padding="@dimen/standard_padding"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
+                android:gravity="center"
+                android:padding="@dimen/standard_padding"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/big_text_size"
+                android:textStyle="bold"
+                tools:text="Wymagane są uprawnienia" />
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:gravity="center"
+                android:padding="@dimen/standard_padding"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/standard_text_size"
+                android:textStyle="normal"
+                tools:text="Potrzebujemy uprawnienie do geolokalizacji abyśmy mogli spersonalizować wyszukiwania." />
+        </RelativeLayout>
+
+        <ImageButton
+            android:layout_width="@dimen/standard_image_size"
+            android:layout_height="@dimen/standard_image_size"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/big_padding"
+            android:background="@drawable/round_button"
+            android:src="@drawable/ic_check"
+            android:tint="@color/background" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
