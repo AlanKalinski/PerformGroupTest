@@ -1,6 +1,6 @@
-package xyz.kalinski.perform.activities.sample
+package xyz.kalinski.perform.activities.main
 
-internal interface SampleView {
+internal interface IMainView {
     fun showProgressBar()
 
     fun hideProgressBar()

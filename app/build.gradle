@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdk
@@ -24,7 +23,12 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        androidTest.java.srcDirs += "src/androidTest/kotlin"
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -79,7 +83,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid"
 
     // Dagger 2
-    compile "com.google.dagger:dagger:$rootProject.dagger"
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     provided "org.glassfish:javax.annotation:$rootProject.javax"
 

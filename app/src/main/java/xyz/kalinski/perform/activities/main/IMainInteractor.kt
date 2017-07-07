@@ -1,6 +1,6 @@
-package xyz.kalinski.perform.activities.sample
+package xyz.kalinski.perform.activities.main
 
-internal interface SampleInteractor {
+internal interface IMainInteractor {
     interface OnDoSomethingListener {
         fun onStart()
 

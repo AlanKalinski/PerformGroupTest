@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">kotlin-repository</string>
+    <string name="app_name">Perform Group Recruitment App</string>
     <string name="response_error">%s Response Error</string>
     <string name="call_error">%s Call Error</string>
 </resources>

@@ -2,43 +2,40 @@ package xyz.kalinski.perform.storage
 
 import android.content.Context
 import android.content.SharedPreferences
-import xyz.kalinski.perform.di.scope.ApplicationScope
-import javax.inject.Inject
 
-@ApplicationScope
-class SharedPrefs @Inject constructor(context: Context, private var sharedPreferences: SharedPreferences = context.getSharedPreferences("perform.storage", Context.MODE_PRIVATE)) {
+class SharedPrefs(context: Context, private var sharedPreferences: SharedPreferences = context.getSharedPreferences("perform.storage", Context.MODE_PRIVATE)) {
 
-    object Strings {}
+    object Strings
 
-    object Longs {}
+    object Longs
 
-    object Booleans {}
+    object Booleans
 
-    object Ints {}
+    object Ints
 
 
     fun storeString(key: String, value: String) {
         val editor = sharedPreferences.edit()
         editor.putString(key, value)
-        editor.commit()
+        editor.apply()
     }
 
     fun storeInt(key: String, value: Int) {
         val editor = sharedPreferences.edit()
         editor.putInt(key, value)
-        editor.commit()
+        editor.apply()
     }
 
     fun storeBoolean(key: String, value: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(key, value)
-        editor.commit()
+        editor.apply()
     }
 
     fun storeLong(key: String, value: Long) {
         val editor = sharedPreferences.edit()
         editor.putLong(key, value)
-        editor.commit()
+        editor.apply()
     }
 
     fun getStringValue(key: String, defValue: String): String {

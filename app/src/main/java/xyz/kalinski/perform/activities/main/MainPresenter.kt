@@ -1,7 +1,8 @@
-package xyz.kalinski.perform.activities.sample
+package xyz.kalinski.perform.activities.main
 
-internal class SamplePresenterImpl(private var view: SampleView?) : SamplePresenter, SampleInteractor.OnDoSomethingListener {
-    private val interactor: SampleInteractor = SampleInteractorImpl()
+internal class MainPresenter(private var view: IMainView?) : IMainPresenter, IMainInteractor.OnDoSomethingListener {
+
+    private val interactor: IMainInteractor = MainInteractor()
 
     override fun onConnecting() {
         view?.showProgressBar()

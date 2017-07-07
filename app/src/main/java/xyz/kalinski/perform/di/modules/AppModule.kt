@@ -5,6 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import xyz.kalinski.perform.PerformApplication
+import xyz.kalinski.perform.storage.SharedPrefs
 import javax.inject.Singleton
 
 @Module

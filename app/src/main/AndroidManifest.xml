@@ -12,7 +12,7 @@
         tools:replace="android:supportsRtl">
 
         <activity
-            android:name="xyz.kalinski.perform.activities.sample.SampleActivity"
+            android:name="xyz.kalinski.perform.activities.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.BrandedLaunch">
             <intent-filter>

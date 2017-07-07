@@ -1,4 +1,4 @@
-package xyz.kalinski.perform.activities.sample
+package xyz.kalinski.perform.activities.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -6,7 +6,7 @@ import timber.log.Timber
 import xyz.kalinski.perform.network.PromotedRestApi
 import javax.inject.Inject
 
-class SampleRequester @Inject constructor(restApi: PromotedRestApi) {
+class MainRequester @Inject constructor(restApi: PromotedRestApi) {
 
     val api: PromotedRestApi = restApi
 

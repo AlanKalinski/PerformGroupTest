@@ -1,19 +1,19 @@
-package xyz.kalinski.perform.activities.sample
+package xyz.kalinski.perform.activities.main
 
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_sample.*
-import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.bases.BaseActivity
 
-class SampleActivity(override val layoutId: Int = R.layout.activity_sample) : BaseActivity(), SampleView {
 
-    private var presenter: SamplePresenter? = null
+class MainActivity(override val layoutId: Int = R.layout.activity_sample) : BaseActivity(), IMainView {
+
+    private var presenter: IMainPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = SamplePresenterImpl(this)
+        presenter = MainPresenter(this)
         btnConnect.setOnClickListener { presenter?.onConnecting() }
     }
 
