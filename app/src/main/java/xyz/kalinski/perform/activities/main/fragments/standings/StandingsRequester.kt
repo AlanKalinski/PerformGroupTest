@@ -1,27 +1,25 @@
-package xyz.kalinski.perform.activities.main
+package xyz.kalinski.perform.activities.main.fragments.standings
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import xyz.kalinski.perform.network.PromotedRestApi
+import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
-class MainRequester @Inject constructor(restApi: PromotedRestApi) {
+class StandingsRequester @Inject constructor(val api: PerformApi) {
 
-    val api: PromotedRestApi = restApi
-
-    fun getPromoted() {
-        api.getPromoted()
+    fun getStandings() {
+        api.getStandings()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
-                            promoted ->
-                            Timber.e(String.format("Promoted result: %s", promoted.toString()))
+                            standings ->
+                            Timber.d(String.format("Standings result: %s", standings.toString()))
                         },
                         {
                             error ->
-                            Timber.e("Get Promoted Error")
+                            Timber.e(String.format("%s, ", error.toString()))
                         }
                 )
     }

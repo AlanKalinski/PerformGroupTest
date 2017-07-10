@@ -2,25 +2,35 @@ package xyz.kalinski.perform
 
 import android.app.Application
 import timber.log.Timber
-import xyz.kalinski.perform.di.components.AppComponent
-import xyz.kalinski.perform.di.components.DaggerAppComponent
+import xyz.kalinski.perform.di.components.*
 import xyz.kalinski.perform.di.modules.AppModule
-import xyz.kalinski.perform.di.modules.DataModule
 
 class PerformApplication : Application() {
 
-    val component: AppComponent by lazy {
-        DaggerAppComponent
-                .builder()
-                .appModule(AppModule(this))
-                .dataModule(DataModule(this))
-                .build()
+    companion object {
+        lateinit var newsComponent: FragmentNewsComponent
+        lateinit var scoresComponent: FragmentScoresComponent
+        lateinit var standingsComponent: FragmentStandingsComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-        component.inject(this)
+        setUpModules()
         setUpLogging()
+    }
+
+    private fun setUpModules() {
+        newsComponent = DaggerFragmentNewsComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+
+        scoresComponent = DaggerFragmentScoresComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+
+        standingsComponent = DaggerFragmentStandingsComponent.builder()
+                .appModule(AppModule(this))
+                .build()
     }
 
     private fun setUpLogging() {

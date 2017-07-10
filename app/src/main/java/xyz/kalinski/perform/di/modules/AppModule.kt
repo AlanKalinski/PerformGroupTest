@@ -5,7 +5,6 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import xyz.kalinski.perform.PerformApplication
-import xyz.kalinski.perform.storage.SharedPrefs
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +16,6 @@ class AppModule(val app: PerformApplication) {
 
     @Provides
     @Singleton
-    fun provideApplication() : Application = app
+    fun provideApplication(): Application = app
 
 }

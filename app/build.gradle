@@ -68,7 +68,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofit"
-    implementation ("com.squareup.retrofit2:converter-simplexml:$rootProject.simplexml"){
+    implementation("com.squareup.retrofit2:converter-simplexml:$rootProject.simplexml") {
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'

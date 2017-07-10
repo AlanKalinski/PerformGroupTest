@@ -1,19 +1,11 @@
 package xyz.kalinski.perform.network
 
 import io.reactivex.Observable
-import retrofit2.http.GET
 import xyz.kalinski.perform.network.models.NewsRss
 import xyz.kalinski.perform.network.models.ResponseXml
 
-interface ApiClient {
-
-    @GET("/utilities/interviews/techtest/latestnews.xml")
+interface IPerformApi {
     fun getLatestNews(): Observable<NewsRss>
-
-    @GET("/utilities/interviews/techtest/scores.xml")
     fun getScores(): Observable<ResponseXml>
-
-    @GET("/utilities/interviews/techtest/standings.xml")
     fun getStandings(): Observable<ResponseXml>
-
 }

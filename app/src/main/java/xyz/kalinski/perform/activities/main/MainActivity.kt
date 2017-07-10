@@ -1,32 +1,34 @@
 package xyz.kalinski.perform.activities.main
 
 import android.os.Bundle
-import android.view.View
-import kotlinx.android.synthetic.main.activity_sample.*
+import kotlinx.android.synthetic.main.activity_main.*
 import xyz.kalinski.perform.R
+import xyz.kalinski.perform.activities.main.fragments.news.NewsFragment
 import xyz.kalinski.perform.bases.BaseActivity
+import xyz.kalinski.perform.utils.replaceIfEmpty
 
 
-class MainActivity(override val layoutId: Int = R.layout.activity_sample) : BaseActivity(), IMainView {
+class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseActivity(), IMainView {
 
     private var presenter: IMainPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = MainPresenter(this)
-        btnConnect.setOnClickListener { presenter?.onConnecting() }
+        initToolbar()
+        initFragment()
     }
 
-    override fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 
-    override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
-    }
+    private fun initFragment() {
+        replaceIfEmpty(R.id.fragment) {
+            NewsFragment.newInstance()
+        }
+        supportFragmentManager.beginTransaction().add(R.id.fragment, NewsFragment.newInstance()).commit()
 
-    override fun showSomethingError() {
-        errorText.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {
