@@ -5,4 +5,5 @@
     <string name="news_fragment_title">NewsRss</string>
     <string name="scores_fragment_title">Scores</string>
     <string name="standings_fragment_title">Standings</string>
+    <string name="news_image_content_desc">NEWS_IMAGE</string>
 </resources>

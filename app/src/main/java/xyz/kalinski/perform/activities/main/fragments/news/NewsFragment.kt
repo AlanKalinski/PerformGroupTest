@@ -1,5 +1,6 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -9,10 +10,13 @@ import kotlinx.android.synthetic.main.fragment_news.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
+import xyz.kalinski.perform.activities.main.fragments.news.adapter.NewsAdapter
+import xyz.kalinski.perform.activities.webview.WebViewActivity
 import xyz.kalinski.perform.bases.BaseFragment
+import xyz.kalinski.perform.network.models.Item
 import javax.inject.Inject
 
-class NewsFragment : BaseFragment() {
+class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     @Inject lateinit var presenter: INewsPresenter
     @Inject lateinit var requester: NewsRequester
@@ -50,7 +54,28 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun initView() {
+        initAdapter()
+        presenter.initView(this)
         presenter.initRequester(requester)
         presenter.getLatestNews()
+    }
+
+    private fun initAdapter() {
+        presenter.getNews()?.let {
+            if (newsList.adapter == null) {
+                newsList.adapter = NewsAdapter(presenter.getNews()!!, this)
+            }
+        }
+    }
+
+    override fun notifyUpdate() {
+        initAdapter()
+        newsList.adapter.notifyDataSetChanged()
+    }
+
+    override fun invoke(item: Item) {
+        /*var intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("URL", item.link)
+        startActivity(intent)*/
     }
 }

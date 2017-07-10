@@ -44,6 +44,8 @@ ext {
     simplexml = '2.3.0'
     dagger = '2.5'
     javax = '10.0-b28'
+    glide = '3.7.0'
+    glideTransform = '2.0.2'
 
     //Test dependencies
     junit = '4.12'
