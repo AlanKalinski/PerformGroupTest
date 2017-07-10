@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="xyz.kalinski.perform">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="xyz.kalinski.perform.PerformApplication"
         android:allowBackup="true"

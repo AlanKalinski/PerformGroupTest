@@ -1,10 +1,12 @@
 package xyz.kalinski.perform.bases
 
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
+import xyz.kalinski.perform.activities.main.IMainView
 
 abstract class BaseFragment : Fragment() {
 
-    protected abstract fun getName(): String
-
+    @StringRes abstract fun getName(): Int
+    abstract fun setMainView(view: IMainView)
 }
 

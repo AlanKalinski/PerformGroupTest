@@ -6,10 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
+import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.bases.BaseFragment
 import javax.inject.Inject
 
 class ScoresFragment : BaseFragment() {
+    lateinit var iMainView: IMainView
+
+    override fun setMainView(view: IMainView) {
+        iMainView = view
+        iMainView.changeTitle(getName())
+    }
 
     companion object {
         fun newInstance() = ScoresFragment()
@@ -18,8 +25,8 @@ class ScoresFragment : BaseFragment() {
     @Inject lateinit var requester: ScoresRequester
 
 
-    override fun getName(): String {
-        return getString(R.string.scores_fragment_title)
+    override fun getName(): Int {
+        return R.string.scores_fragment_title
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
