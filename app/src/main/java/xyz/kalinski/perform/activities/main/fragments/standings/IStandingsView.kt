@@ -5,4 +5,5 @@ interface IStandingsView {
     fun hideProgressBar()
     fun showProgressBar()
     fun requestForItems()
+    fun showError()
 }

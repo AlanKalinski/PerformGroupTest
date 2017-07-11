@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.standings_item_view.view.*
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.textColor
 import xyz.kalinski.perform.R
-import xyz.kalinski.perform.network.models.Ranking
+import xyz.kalinski.perform.models.response.Ranking
 import xyz.kalinski.perform.utils.inflate
 
 class StandingsAdapter(var items: ArrayList<Ranking>) : RecyclerView.Adapter<StandingsAdapter.StandingViewHolder>() {

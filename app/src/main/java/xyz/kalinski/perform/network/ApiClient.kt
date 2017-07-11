@@ -2,8 +2,8 @@ package xyz.kalinski.perform.network
 
 import io.reactivex.Observable
 import retrofit2.http.GET
-import xyz.kalinski.perform.network.models.NewsRss
-import xyz.kalinski.perform.network.models.ResponseXml
+import xyz.kalinski.perform.models.response.NewsRss
+import xyz.kalinski.perform.models.response.ResponseXml
 
 interface ApiClient {
 

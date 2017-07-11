@@ -5,4 +5,5 @@ interface IScoresView {
     fun hideProgressBar()
     fun showProgressBar()
     fun requestForItems()
+    fun showError()
 }

@@ -1,6 +1,7 @@
 package xyz.kalinski.perform.activities.main.fragments.scores
-import xyz.kalinski.perform.network.models.Match
-import xyz.kalinski.perform.network.models.ResponseXml
+import xyz.kalinski.perform.models.response.ResponseXml
+import xyz.kalinski.perform.view.ViewType
+import java.util.ArrayList
 
 interface IScoresPresenter {
     interface RequesterListener {
@@ -11,7 +12,7 @@ interface IScoresPresenter {
     fun initView(view: IScoresView)
     fun initRequester(requester: ScoresRequester)
     fun getScores()
-    fun getList(): ArrayList<Match>
+    fun getList(): ArrayList<ViewType>
     fun onDestroy()
 
 }

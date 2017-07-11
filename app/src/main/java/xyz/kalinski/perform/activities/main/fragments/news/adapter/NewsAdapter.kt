@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.news_item_view.view.*
 import xyz.kalinski.perform.R
-import xyz.kalinski.perform.network.models.Item
+import xyz.kalinski.perform.models.response.Item
 import xyz.kalinski.perform.utils.inflate
 import xyz.kalinski.perform.utils.loadImageCenter
 

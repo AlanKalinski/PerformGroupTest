@@ -1,7 +1,7 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
-import xyz.kalinski.perform.network.models.Item
-import xyz.kalinski.perform.network.models.NewsRss
+import xyz.kalinski.perform.models.response.Item
+import xyz.kalinski.perform.models.response.NewsRss
 
 class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
@@ -32,6 +32,7 @@ class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
     }
 
     override fun onError() {
+        view?.showError()
     }
 
     override fun onDestroy() {

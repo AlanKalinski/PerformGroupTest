@@ -1,7 +1,7 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
-import xyz.kalinski.perform.network.models.Item
-import xyz.kalinski.perform.network.models.NewsRss
+import xyz.kalinski.perform.models.response.Item
+import xyz.kalinski.perform.models.response.NewsRss
 
 interface INewsPresenter {
     interface RequesterListener {

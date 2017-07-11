@@ -3,8 +3,9 @@ package xyz.kalinski.perform.activities.main.fragments.scores
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import xyz.kalinski.perform.network.models.Match
-import xyz.kalinski.perform.network.models.ResponseXml
+import xyz.kalinski.perform.models.ScoreHeader
+import xyz.kalinski.perform.models.response.ResponseXml
+import xyz.kalinski.perform.view.ViewType
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -33,14 +34,24 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
                 .subscribe({ requester.getScores(this) })
     }
 
-    override fun getList(): ArrayList<Match> {
-        val list = arrayListOf<Match>()
+    override fun getList(): ArrayList<ViewType> {
+        val list = arrayListOf<ViewType>()
 
         xml?.competition?.season?.round?.groupList?.size ?: return list
 
-        for (i in 0..xml!!.competition!!.season!!.round!!.groupList!!.size - 1)
-            xml!!.competition!!.season!!.round!!.groupList!![i].matchList?.let { it1 -> list.addAll(it1) }
+        val dateSet = hashSetOf<ScoreHeader>()
 
+        for (i in 0..xml!!.competition!!.season!!.round!!.groupList!!.size - 1) {
+            val group = xml!!.competition!!.season!!.round!!.groupList!![i]
+            if (group.matchList != null) {
+                for (item in group.matchList!!) {
+                    if (item.dateUtc != null) dateSet.add(ScoreHeader(item.dateUtc!!))
+                    list.add(item)
+                }
+            }
+        }
+
+        list.addAll(0, dateSet)
         return list
     }
 
@@ -58,5 +69,6 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
     }
 
     override fun onError() {
+        view?.showError()
     }
 }

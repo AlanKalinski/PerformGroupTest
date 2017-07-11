@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Perform Group Recruitment App</string>
-    <string name="response_error">%s Response Error</string>
-    <string name="call_error">%s Call Error</string>
-    <string name="news_fragment_title">NewsRss</string>
+
+    <string name="news_fragment_title">News</string>
     <string name="scores_fragment_title">Scores</string>
     <string name="standings_fragment_title">Standings</string>
+
     <string name="news_image_content_desc">NEWS_IMAGE</string>
     <string name="score_text_format" formatted="false">%d : %d</string>
 </resources>

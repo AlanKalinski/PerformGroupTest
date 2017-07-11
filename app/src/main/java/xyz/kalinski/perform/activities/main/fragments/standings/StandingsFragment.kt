@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_with_recycler.*
-import kotlinx.android.synthetic.main.progressbar.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
@@ -23,11 +22,11 @@ class StandingsFragment : BaseFragment(), IStandingsView {
 
     override fun setMainView(view: IMainView) {
         iMainView = view
-        iMainView.changeTitle(getName())
     }
 
     companion object {
         fun newInstance() = StandingsFragment()
+        fun getName(): Int = R.string.standings_fragment_title
     }
 
     private val standingsList by lazy {
@@ -35,10 +34,6 @@ class StandingsFragment : BaseFragment(), IStandingsView {
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView
-    }
-
-    override fun getName(): Int {
-        return R.string.standings_fragment_title
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,11 +84,15 @@ class StandingsFragment : BaseFragment(), IStandingsView {
     }
 
     override fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        swiperefresh.isRefreshing = true
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        swiperefresh.isRefreshing = false
+    }
+
+    override fun showError() {
+        hideProgressBar()
     }
 
     override fun onDestroy() {

@@ -1,4 +1,4 @@
-package xyz.kalinski.perform.network.models
+package xyz.kalinski.perform.models.response
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element

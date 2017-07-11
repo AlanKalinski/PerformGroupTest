@@ -1,8 +1,8 @@
 package xyz.kalinski.perform.network
 
 import io.reactivex.Observable
-import xyz.kalinski.perform.network.models.NewsRss
-import xyz.kalinski.perform.network.models.ResponseXml
+import xyz.kalinski.perform.models.response.NewsRss
+import xyz.kalinski.perform.models.response.ResponseXml
 
 interface IPerformApi {
     fun getLatestNews(): Observable<NewsRss>

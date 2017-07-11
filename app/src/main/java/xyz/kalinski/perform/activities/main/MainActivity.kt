@@ -28,10 +28,7 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
             NewsFragment.newInstance()
         } as BaseFragment
         selectedFragment.setMainView(this)
-    }
-
-    override fun changeTitle(title: Int) {
-        setTitle(getString(title))
+        supportActionBar?.title = getString(NewsFragment.getName())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,31 +40,34 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
         when (item?.itemId) {
             R.id.latest_news -> {
                 consume {
-                    if (selectedFragment != NewsFragment.newInstance()) {
-                        replace(R.id.fragment) {
+                    if (selectedFragment !is NewsFragment) {
+                        selectedFragment = replace(R.id.fragment) {
                             NewsFragment.newInstance()
-                        }
+                        } as BaseFragment
                         selectedFragment.setMainView(this)
+                        supportActionBar?.title = getString(NewsFragment.getName())
                     }
                 }
             }
             R.id.scores -> {
                 consume {
-                    if (selectedFragment != ScoresFragment.newInstance()) {
-                        replace(R.id.fragment) {
+                    if (selectedFragment !is ScoresFragment) {
+                        selectedFragment = replace(R.id.fragment) {
                             ScoresFragment.newInstance()
-                        }
+                        } as BaseFragment
                         selectedFragment.setMainView(this)
+                        supportActionBar?.title = getString(ScoresFragment.getName())
                     }
                 }
             }
             R.id.standing -> {
                 consume {
-                    if (selectedFragment != StandingsFragment.newInstance()) {
-                        replace(R.id.fragment) {
+                    if (selectedFragment !is StandingsFragment) {
+                        selectedFragment = replace(R.id.fragment) {
                             StandingsFragment.newInstance()
-                        }
+                        } as BaseFragment
                         selectedFragment.setMainView(this)
+                        supportActionBar?.title = getString(StandingsFragment.getName())
                     }
                 }
             }

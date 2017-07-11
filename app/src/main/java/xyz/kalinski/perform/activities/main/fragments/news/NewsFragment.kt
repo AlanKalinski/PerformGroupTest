@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_with_recycler.*
-import kotlinx.android.synthetic.main.progressbar.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.news.adapter.NewsAdapter
 import xyz.kalinski.perform.activities.webview.WebViewActivity
 import xyz.kalinski.perform.bases.BaseFragment
-import xyz.kalinski.perform.network.models.Item
+import xyz.kalinski.perform.models.response.Item
 import javax.inject.Inject
 
 class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
@@ -25,6 +24,7 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     companion object {
         fun newInstance() = NewsFragment()
+        fun getName(): Int = R.string.news_fragment_title
     }
 
     private val newsList by lazy {
@@ -36,7 +36,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     override fun setMainView(view: IMainView) {
         iMainView = view
-        iMainView.changeTitle(getName())
     }
 
 
@@ -54,10 +53,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun getName(): Int {
-        return R.string.news_fragment_title
-    }
-
     private fun initView() {
         initAdapter()
         initSwipeToRefresh()
@@ -72,7 +67,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
 
     override fun requestForItems() {
-        swiperefresh.isRefreshing = false
         showProgressBar()
         presenter.getLatestNews()
     }
@@ -99,11 +93,15 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     override fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        swiperefresh.isRefreshing = true
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        swiperefresh.isRefreshing = false
+    }
+
+    override fun showError() {
+        hideProgressBar()
     }
 
     override fun onDestroy() {

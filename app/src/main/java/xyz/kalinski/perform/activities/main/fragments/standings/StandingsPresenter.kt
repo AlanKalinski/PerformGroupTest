@@ -1,8 +1,8 @@
 package xyz.kalinski.perform.activities.main.fragments.standings
 
 import xyz.kalinski.perform.activities.main.fragments.scores.IScoresPresenter
-import xyz.kalinski.perform.network.models.Ranking
-import xyz.kalinski.perform.network.models.ResponseXml
+import xyz.kalinski.perform.models.response.Ranking
+import xyz.kalinski.perform.models.response.ResponseXml
 
 class StandingsPresenter : IStandingsPresenter, IScoresPresenter.RequesterListener {
 
@@ -40,5 +40,6 @@ class StandingsPresenter : IStandingsPresenter, IScoresPresenter.RequesterListen
     }
 
     override fun onError() {
+        view?.showError()
     }
 }

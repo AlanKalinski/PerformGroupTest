@@ -1,9 +1,11 @@
-package xyz.kalinski.perform.network.models
+package xyz.kalinski.perform.models.response
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
+import xyz.kalinski.perform.view.ViewType
+import xyz.kalinski.perform.view.ViewTypes
 
 @Root(name = "gsmrs")
 data class ResponseXml(
@@ -75,7 +77,6 @@ data class Group(
         @field:Attribute(name = "name") var name: String? = null,
         @field:Attribute(name = "last_updated") var lastUpdated: String? = null,
         @field:ElementList(name = "match", inline = true) var matchList: ArrayList<Match>? = null
-
 )
 
 @Root(strict = false)
@@ -96,7 +97,9 @@ data class Match(
         @field:Attribute(name = "fs_A") var scoreA: Int? = null,
         @field:Attribute(name = "fs_B") var scoreB: Int? = null,
         @field:Attribute(name = "last_updated") var lastUpdated: String? = null
-)
+) : ViewType {
+    override fun getType() = ViewTypes.ITEM
+}
 
 @Root(strict = false)
 data class ResultTable(
