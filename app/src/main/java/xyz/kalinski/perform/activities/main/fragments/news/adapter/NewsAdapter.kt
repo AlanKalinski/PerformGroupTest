@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.news_item_view.view.*
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.network.models.Item
 import xyz.kalinski.perform.utils.inflate
+import xyz.kalinski.perform.utils.loadImageCenter
 import xyz.kalinski.perform.utils.loadImageFill
 
 class NewsAdapter(val items: ArrayList<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
@@ -19,7 +20,7 @@ class NewsAdapter(val items: ArrayList<Item>, val listener: (Item) -> Unit) : Re
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Item, listener: (Item) -> Unit) = with(itemView) {
-            image.loadImageFill(item.link)
+            image.loadImageCenter(item.enclosure?.url)
             title.text = item.title
             date.text = item.pubDate
             itemView.setOnClickListener { listener.invoke(item) }

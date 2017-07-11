@@ -78,9 +78,9 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     override fun invoke(item: Item) {
-        /*var intent = Intent(this, WebViewActivity::class.java)
+        val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra("URL", item.link)
-        startActivity(intent)*/
+        startActivity(intent)
     }
 
     override fun onDestroy() {

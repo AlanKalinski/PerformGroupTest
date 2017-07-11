@@ -8,17 +8,17 @@ import xyz.kalinski.perform.bases.BaseActivity
 
 class WebViewActivity(override val layoutId: Int = R.layout.activity_webview) : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setSupportActionBar(toolbar)
-        loadPage()
         super.onCreate(savedInstanceState)
+        setTitleWithBackButton("WebView") //TODO
+        loadPage()
     }
 
     private fun loadPage() {
         val url = intent.getStringExtra("URL")
 
-        val settings = webView.settings
+        val settings = webview.settings
         settings.javaScriptEnabled = true
 
-        webView.loadUrl(url)
+        webview.loadUrl(url)
     }
 }
