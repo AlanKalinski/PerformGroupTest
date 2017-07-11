@@ -8,9 +8,8 @@ import xyz.kalinski.perform.R
 import xyz.kalinski.perform.network.models.Item
 import xyz.kalinski.perform.utils.inflate
 import xyz.kalinski.perform.utils.loadImageCenter
-import xyz.kalinski.perform.utils.loadImageFill
 
-class NewsAdapter(val items: ArrayList<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(var items: ArrayList<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsViewHolder(parent.inflate(R.layout.news_item_view))
 

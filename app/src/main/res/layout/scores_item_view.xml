@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/homeTeam"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/standard_padding"
+        android:textColor="?colorAccent"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold"
+        tools:text="Wolves" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/score_gradient"
+        android:gravity="center"
+        android:padding="@dimen/standard_padding"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold"
+        tools:text="2 : 2" />
+
+    <TextView
+        android:id="@+id/awayTeam"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:gravity="end|center_vertical"
+        android:padding="@dimen/standard_padding"
+        android:textColor="?colorAccent"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold"
+        tools:text="Chelsea" />
+
+</LinearLayout>

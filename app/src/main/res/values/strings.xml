@@ -6,4 +6,5 @@
     <string name="scores_fragment_title">Scores</string>
     <string name="standings_fragment_title">Standings</string>
     <string name="news_image_content_desc">NEWS_IMAGE</string>
+    <string name="score_text_format" formatted="false">%d : %d</string>
 </resources>

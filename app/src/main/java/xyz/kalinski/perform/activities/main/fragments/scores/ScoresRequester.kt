@@ -8,18 +8,18 @@ import javax.inject.Inject
 
 class ScoresRequester @Inject constructor(val api: PerformApi) {
 
-    fun getScores() {
+    fun getScores(listener: IScoresPresenter.RequesterListener) {
         api.getScores()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
                             scores ->
-                            Timber.d(String.format("Scores result: %s", scores.toString()))
+                            listener.onItemsReceived(scores)
                         },
                         {
                             error ->
-                            Timber.e(String.format("%s, ", error.toString()))
+                            listener.onError()
                         }
                 )
     }

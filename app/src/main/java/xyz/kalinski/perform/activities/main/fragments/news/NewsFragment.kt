@@ -68,6 +68,8 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         presenter.getNews()?.let {
             if (newsList.adapter == null) {
                 newsList.adapter = NewsAdapter(presenter.getNews()!!, this)
+            } else {
+                (newsList.adapter as NewsAdapter).items = presenter.getNews()!!
             }
         }
     }
