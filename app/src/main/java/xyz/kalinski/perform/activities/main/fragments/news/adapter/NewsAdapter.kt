@@ -21,7 +21,9 @@ class NewsAdapter(var items: ArrayList<Item>, val listener: (Item) -> Unit) : Re
         fun bind(item: Item, listener: (Item) -> Unit) = with(itemView) {
             image.loadImageCenter(item.enclosure?.url)
             title.text = item.title
+            description.text = item.description
             date.text = item.pubDate
+            category.text = item.category
             itemView.setOnClickListener { listener.invoke(item) }
         }
     }
