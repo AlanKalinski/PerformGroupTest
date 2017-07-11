@@ -35,6 +35,7 @@ class StandingsPresenter : IStandingsPresenter, IScoresPresenter.RequesterListen
 
     override fun onItemsReceived(xml: ResponseXml) {
         this.xml = xml
+        view?.hideProgressBar()
         view?.notifyUpdate()
     }
 

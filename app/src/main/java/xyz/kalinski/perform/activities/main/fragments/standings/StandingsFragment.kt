@@ -5,7 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_standings.*
+import kotlinx.android.synthetic.main.fragment_with_recycler.*
+import kotlinx.android.synthetic.main.progressbar.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
@@ -14,6 +15,7 @@ import xyz.kalinski.perform.bases.BaseFragment
 import javax.inject.Inject
 
 class StandingsFragment : BaseFragment(), IStandingsView {
+
     @Inject lateinit var presenter: IStandingsPresenter
     @Inject lateinit var requester: StandingsRequester
 
@@ -45,7 +47,7 @@ class StandingsFragment : BaseFragment(), IStandingsView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_standings, container, false)
+        return inflater.inflate(R.layout.fragment_with_recycler, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -55,8 +57,19 @@ class StandingsFragment : BaseFragment(), IStandingsView {
 
     private fun initView() {
         initAdapter()
+        initSwipeToRefresh()
         presenter.initView(this)
         presenter.initRequester(requester)
+        requestForItems()
+    }
+
+    private fun initSwipeToRefresh() {
+        swiperefresh.setOnRefreshListener { requestForItems() }
+    }
+
+    override fun requestForItems() {
+        swiperefresh.isRefreshing = false
+        showProgressBar()
         presenter.getStandings()
     }
 
@@ -73,6 +86,14 @@ class StandingsFragment : BaseFragment(), IStandingsView {
     override fun notifyUpdate() {
         initAdapter()
         standingsList.adapter.notifyDataSetChanged()
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 
     override fun onDestroy() {

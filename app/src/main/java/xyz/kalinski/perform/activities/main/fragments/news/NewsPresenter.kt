@@ -27,6 +27,7 @@ class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
     override fun onItemsReceived(newsRss: NewsRss) {
         this.newsRss = newsRss
+        view?.hideProgressBar()
         view?.notifyUpdate()
     }
 

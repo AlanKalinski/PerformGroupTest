@@ -1,6 +1,4 @@
 package xyz.kalinski.perform.activities.main.fragments.scores
-
-import xyz.kalinski.perform.activities.main.fragments.news.IScoresView
 import xyz.kalinski.perform.network.models.Match
 import xyz.kalinski.perform.network.models.ResponseXml
 

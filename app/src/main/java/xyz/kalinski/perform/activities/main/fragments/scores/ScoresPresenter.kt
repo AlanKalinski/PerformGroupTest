@@ -3,7 +3,6 @@ package xyz.kalinski.perform.activities.main.fragments.scores
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import xyz.kalinski.perform.activities.main.fragments.news.IScoresView
 import xyz.kalinski.perform.network.models.Match
 import xyz.kalinski.perform.network.models.ResponseXml
 import java.util.*
@@ -54,6 +53,7 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
 
     override fun onItemsReceived(xml: ResponseXml) {
         this.xml = xml
+        view?.hideProgressBar()
         view?.notifyUpdate()
     }
 
