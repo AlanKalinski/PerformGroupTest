@@ -109,8 +109,8 @@ data class ResultTable(
 
 @Root(strict = false)
 data class Ranking(
-        @field:Attribute(name = "rank") var rank: Int? = null,
-        @field:Attribute(name = "last_rank") var lastRank: Int? = null,
+        @field:Attribute(name = "rank") var rank: Int = 0,
+        @field:Attribute(name = "last_rank") var lastRank: Int = 0,
         @field:Attribute(name = "zone_start", required = false) var zoneStart: String? = null,
         @field:Attribute(name = "zone_end", required = false) var zoneEnd: String? = null,
         @field:Attribute(name = "team_id") var teamId: Long? = null,
@@ -124,4 +124,6 @@ data class Ranking(
         @field:Attribute(name = "goals_pro") var goalsPro: Int = 0,
         @field:Attribute(name = "goals_against") var goalsAgainst: Int = 0,
         @field:Attribute(name = "points") var points: Int? = null
-)
+) : ViewType {
+    override fun getType() = ViewTypes.ITEM
+}

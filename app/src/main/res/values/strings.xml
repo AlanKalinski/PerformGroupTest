@@ -7,4 +7,12 @@
 
     <string name="news_image_content_desc">NEWS_IMAGE</string>
     <string name="score_text_format" formatted="false">%d : %d</string>
+    <string name="standings_rank">No</string>
+    <string name="standings_club">Club</string>
+    <string name="standings_played">P</string>
+    <string name="standings_won">W</string>
+    <string name="standings_draw">D</string>
+    <string name="standings_lose">L</string>
+    <string name="standings_goal_balance">GD</string>
+    <string name="standings_points">Pts</string>
 </resources>

@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.scores_item_view.view.*
 import org.jetbrains.anko.backgroundColor
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.models.ScoreHeader
-import xyz.kalinski.perform.models.response.Group
 import xyz.kalinski.perform.models.response.Match
 import xyz.kalinski.perform.utils.inflate
 import xyz.kalinski.perform.view.ViewHolder
@@ -36,18 +35,18 @@ class ScoresAdapter(var items: ArrayList<ViewType>) : RecyclerView.Adapter<ViewH
     }
 
     class ScoresViewHolder(itemView: View) : ViewHolder(itemView) {
-        override fun bind(it: ViewType, position: Int) = with(itemView) {
+        override fun bind(it: ViewType, pos: Int) = with(itemView) {
             val item = it as Match
             homeTeam.text = item.teamAname
             awayTeam.text = item.teamBname
             score.text = String.format(context.getString(R.string.score_text_format), item.scoreA, item.scoreB)
-            if (position % 2 == 0) layout.backgroundColor = ContextCompat.getColor(context, R.color.scoresPrimaryColor)
+            if (pos % 2 == 0) layout.backgroundColor = ContextCompat.getColor(context, R.color.scoresPrimaryColor)
             else layout.backgroundColor = ContextCompat.getColor(context, R.color.scoresSecondaryColor)
         }
     }
 
     class HeaderViewHolder(itemView: View) : ViewHolder(itemView) {
-        override fun bind(it: ViewType, position: Int) = with(itemView) {
+        override fun bind(it: ViewType, pos: Int) = with(itemView) {
             val item = it as ScoreHeader
             date.text = item.date
         }
