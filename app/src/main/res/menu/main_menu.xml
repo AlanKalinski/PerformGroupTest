@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/latest_news"
+        android:orderInCategory="100"
+        android:title="@string/news_fragment_title"/>
+    <item
+        android:id="@+id/scores"
+        android:orderInCategory="100"
+        android:title="@string/scores_fragment_title"/>
+    <item
+        android:id="@+id/standing"
+        android:orderInCategory="100"
+        android:title="@string/standings_fragment_title"/>
+
+</menu>

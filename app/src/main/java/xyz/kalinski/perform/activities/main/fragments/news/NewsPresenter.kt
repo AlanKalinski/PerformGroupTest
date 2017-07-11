@@ -6,15 +6,14 @@ import xyz.kalinski.perform.network.models.NewsRss
 class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
     lateinit var requester: NewsRequester
-    lateinit var view: INewsView
-
+    var view: INewsView? = null
     var newsRss: NewsRss? = null
 
     override fun initRequester(requester: NewsRequester) {
         this.requester = requester
     }
 
-    override fun initView(view: INewsView){
+    override fun initView(view: INewsView) {
         this.view = view
     }
 
@@ -28,9 +27,14 @@ class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
     override fun onItemsReceived(newsRss: NewsRss) {
         this.newsRss = newsRss
-        view.notifyUpdate()
+        view?.notifyUpdate()
     }
 
     override fun onError() {
+    }
+
+    override fun onDestroy() {
+        view = null
+        newsRss = null
     }
 }

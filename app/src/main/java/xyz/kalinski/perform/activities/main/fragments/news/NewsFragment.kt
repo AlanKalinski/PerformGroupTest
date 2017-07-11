@@ -45,8 +45,12 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        initView()
         return inflater.inflate(R.layout.fragment_news, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        initView()
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun getName(): Int {
@@ -77,5 +81,10 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         /*var intent = Intent(this, WebViewActivity::class.java)
         intent.putExtra("URL", item.link)
         startActivity(intent)*/
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
     }
 }

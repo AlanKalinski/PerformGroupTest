@@ -12,4 +12,5 @@ interface INewsPresenter {
     fun initRequester(requester: NewsRequester)
     fun initView(view: INewsView)
     fun getNews(): ArrayList<Item>?
+    fun onDestroy()
 }
