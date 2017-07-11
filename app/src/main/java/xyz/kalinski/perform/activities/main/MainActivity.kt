@@ -42,28 +42,34 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.latest_news -> {
-                if (selectedFragment != NewsFragment.newInstance()) {
-                    replace(R.id.fragment) {
-                        NewsFragment.newInstance()
+                consume {
+                    if (selectedFragment != NewsFragment.newInstance()) {
+                        replace(R.id.fragment) {
+                            NewsFragment.newInstance()
+                        }
+                        selectedFragment.setMainView(this)
                     }
                 }
-                return true
             }
             R.id.scores -> {
-                if (selectedFragment != ScoresFragment.newInstance()) {
-                    replace(R.id.fragment) {
-                        ScoresFragment.newInstance()
+                consume {
+                    if (selectedFragment != ScoresFragment.newInstance()) {
+                        replace(R.id.fragment) {
+                            ScoresFragment.newInstance()
+                        }
+                        selectedFragment.setMainView(this)
                     }
                 }
-                return true
             }
             R.id.standing -> {
-                if (selectedFragment != StandingsFragment.newInstance()) {
-                    replace(R.id.fragment) {
-                        StandingsFragment.newInstance()
+                consume {
+                    if (selectedFragment != StandingsFragment.newInstance()) {
+                        replace(R.id.fragment) {
+                            StandingsFragment.newInstance()
+                        }
+                        selectedFragment.setMainView(this)
                     }
                 }
-                return true
             }
         }
         return super.onOptionsItemSelected(item)

@@ -118,7 +118,7 @@ data class Ranking(
         @field:Attribute(name = "matches_won") var matchesWon: Int? = null,
         @field:Attribute(name = "matches_draw") var matchesDraw: Int? = null,
         @field:Attribute(name = "matches_lost") var matchesLost: Int? = null,
-        @field:Attribute(name = "goals_pro") var goalsPro: Int? = null,
-        @field:Attribute(name = "goals_against") var goalsAgainst: Int? = null,
+        @field:Attribute(name = "goals_pro") var goalsPro: Int = 0,
+        @field:Attribute(name = "goals_against") var goalsAgainst: Int = 0,
         @field:Attribute(name = "points") var points: Int? = null
 )

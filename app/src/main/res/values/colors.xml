@@ -5,6 +5,10 @@
     <color name="colorAccent">#064170</color>
     <color name="colorAccentDark">#053760</color>
 
+    <color name="gray">#656565</color>
+    <color name="red">#da0000</color>
+    <color name="green">#1bce00</color>
+
     <color name="scoresPrimaryColor">#FFFFFF</color>
     <color name="scoresSecondaryColor">#DDDDDD</color>
     <color name="contrastText">#FF601001</color>
