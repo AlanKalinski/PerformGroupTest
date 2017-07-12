@@ -11,11 +11,24 @@ import xyz.kalinski.perform.R
 import xyz.kalinski.perform.models.ScoreHeader
 import xyz.kalinski.perform.models.response.Match
 import xyz.kalinski.perform.utils.inflate
+import xyz.kalinski.perform.view.AutoUpdatableAdapter
 import xyz.kalinski.perform.view.ViewHolder
 import xyz.kalinski.perform.view.ViewType
 import xyz.kalinski.perform.view.ViewTypes
+import kotlin.properties.Delegates
 
-class ScoresAdapter(var items: ArrayList<ViewType>) : RecyclerView.Adapter<ViewHolder>() {
+class ScoresAdapter : RecyclerView.Adapter<ViewHolder>(), AutoUpdatableAdapter {
+    var items: List<ViewType> by Delegates.observable(emptyList()) {
+        prop, old, new ->
+        autoNotify(old, new) { o, n -> compare(o, n) }
+    }
+
+    fun compare(o: ViewType, n: ViewType): Boolean {
+        if ((o.getType() == n.getType()) && (o is Match) && (n is Match) && (o.id == n.id)) return true
+        if ((o.getType() == n.getType()) && (o is ScoreHeader) && (n is ScoreHeader) && (o.date == n.date)) return true
+        return false
+    }
+
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bind(items[position], position)
     }

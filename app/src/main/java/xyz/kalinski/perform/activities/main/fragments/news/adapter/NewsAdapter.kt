@@ -9,8 +9,15 @@ import xyz.kalinski.perform.commons.DateHelper
 import xyz.kalinski.perform.models.response.Item
 import xyz.kalinski.perform.utils.inflate
 import xyz.kalinski.perform.utils.loadImageCenter
+import xyz.kalinski.perform.view.AutoUpdatableAdapter
+import kotlin.properties.Delegates
 
-class NewsAdapter(var items: ArrayList<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(val listener: (Item) -> Unit) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(), AutoUpdatableAdapter {
+
+    var items: List<Item> by Delegates.observable(emptyList()) {
+        prop, old, new ->
+        autoNotify(old, new) { o, n -> o.guid == n.guid }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsViewHolder(parent.inflate(R.layout.news_item_view))
 

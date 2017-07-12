@@ -28,8 +28,11 @@ class ScoresFragment : BaseFragment(), IScoresView {
         recyclerView.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = adapter
         recyclerView
     }
+
+    val adapter = ScoresAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,6 @@ class ScoresFragment : BaseFragment(), IScoresView {
     }
 
     private fun initView() {
-        initAdapter()
         initSwipeToRefresh()
         requestForItems()
     }
@@ -62,16 +64,12 @@ class ScoresFragment : BaseFragment(), IScoresView {
         presenter.getScores()
     }
 
-    private fun initAdapter() {
-        if (scoresList.adapter == null) {
-            scoresList.adapter = ScoresAdapter(presenter.getList())
-        } else {
-            (scoresList.adapter as ScoresAdapter).items = presenter.getList()
-        }
+    private fun fillAdapter() {
+        adapter.items = presenter.getList()
     }
 
     override fun notifyUpdate() {
-        initAdapter()
+        fillAdapter()
         scoresList.adapter.notifyDataSetChanged()
     }
 

@@ -11,12 +11,19 @@ import org.jetbrains.anko.textColor
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.models.response.Ranking
 import xyz.kalinski.perform.utils.inflate
+import xyz.kalinski.perform.view.AutoUpdatableAdapter
 import xyz.kalinski.perform.view.ViewHolder
 import xyz.kalinski.perform.view.ViewType
 import xyz.kalinski.perform.view.ViewTypes
+import kotlin.properties.Delegates
 
 
-class StandingsAdapter(var items: List<Ranking>) : RecyclerView.Adapter<ViewHolder>() {
+class StandingsAdapter() : RecyclerView.Adapter<ViewHolder>(), AutoUpdatableAdapter {
+    var items: List<Ranking> by Delegates.observable(emptyList()) {
+        prop, old, new ->
+        autoNotify(old, new) { o, n -> o.teamId == n.teamId }
+    }
+
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         if (position == 0) return
         else holder?.bind(items[position - 1], position)

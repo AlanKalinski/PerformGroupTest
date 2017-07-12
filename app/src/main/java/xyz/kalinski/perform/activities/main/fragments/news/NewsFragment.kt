@@ -31,8 +31,11 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         recyclerView.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = adapter
         recyclerView
     }
+
+    val adapter = NewsAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PerformApplication.newsComponent.inject(this)
@@ -50,7 +53,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     private fun initView() {
-        initAdapter()
         initSwipeToRefresh()
         requestForItems()
     }
@@ -64,18 +66,12 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         presenter.getLatestNews()
     }
 
-    private fun initAdapter() {
-        presenter.getNews()?.let {
-            if (newsList.adapter == null) {
-                newsList.adapter = NewsAdapter(presenter.getNews()!!, this)
-            } else {
-                (newsList.adapter as NewsAdapter).items = presenter.getNews()!!
-            }
-        }
+    private fun fillAdapter() {
+        presenter.getNews()?.let { adapter.items = presenter.getNews()!! }
     }
 
     override fun notifyUpdate() {
-        initAdapter()
+        fillAdapter()
         newsList.adapter.notifyDataSetChanged()
     }
 

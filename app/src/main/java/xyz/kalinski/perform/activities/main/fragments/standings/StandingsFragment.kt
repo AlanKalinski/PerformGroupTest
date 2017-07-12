@@ -28,8 +28,11 @@ class StandingsFragment : BaseFragment(), IStandingsView {
         recyclerView.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = adapter
         recyclerView
     }
+
+    var adapter = StandingsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,6 @@ class StandingsFragment : BaseFragment(), IStandingsView {
     }
 
     private fun initView() {
-        initAdapter()
         initSwipeToRefresh()
         requestForItems()
     }
@@ -62,18 +64,12 @@ class StandingsFragment : BaseFragment(), IStandingsView {
         presenter.getStandings()
     }
 
-    private fun initAdapter() {
-        presenter.getList()?.let {
-            if (standingsList.adapter == null) {
-                standingsList.adapter = StandingsAdapter(presenter.getList()!!)
-            } else {
-                (standingsList.adapter as StandingsAdapter).items = presenter.getList()!!
-            }
-        }
+    private fun fillAdapter() {
+        presenter.getList()?.let { adapter.items = presenter.getList()!! }
     }
 
     override fun notifyUpdate() {
-        initAdapter()
+        fillAdapter()
         standingsList.adapter.notifyDataSetChanged()
     }
 
