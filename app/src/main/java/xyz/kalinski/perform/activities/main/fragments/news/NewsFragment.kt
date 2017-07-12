@@ -2,6 +2,7 @@ package xyz.kalinski.perform.activities.main.fragments.news
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import xyz.kalinski.perform.activities.main.fragments.news.adapter.NewsAdapter
 import xyz.kalinski.perform.activities.webview.WebViewActivity
 import xyz.kalinski.perform.bases.BaseFragment
 import xyz.kalinski.perform.models.response.Item
+import xyz.kalinski.perform.utils.snack
 import javax.inject.Inject
 
 class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
@@ -103,6 +105,10 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     override fun showError() {
         hideProgressBar()
+        swiperefresh.snack(messageRes = R.string.error_message, length = Snackbar.LENGTH_LONG, f = {
+            requestForItems()
+            dismiss()
+        })
     }
 
     override fun onDestroy() {

@@ -16,4 +16,6 @@
     <string name="standings_goal_balance">GD</string>
     <string name="standings_points">Pts</string>
     <string name="refresh">Refresh</string>
+
+    <string name="error_message">An error occurred downloading data</string>
 </resources>

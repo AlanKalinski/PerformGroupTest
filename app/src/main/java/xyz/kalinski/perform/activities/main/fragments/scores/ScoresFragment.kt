@@ -2,6 +2,7 @@ package xyz.kalinski.perform.activities.main.fragments.scores
 
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.scores.adapter.ScoresAdapter
 import xyz.kalinski.perform.bases.BaseFragment
+import xyz.kalinski.perform.utils.snack
 import javax.inject.Inject
 
 class ScoresFragment : BaseFragment(), IScoresView {
@@ -92,6 +94,10 @@ class ScoresFragment : BaseFragment(), IScoresView {
 
     override fun showError() {
         hideProgressBar()
+        swiperefresh.snack(messageRes = R.string.error_message, length = Snackbar.LENGTH_LONG, f = {
+            requestForItems()
+            dismiss()
+        })
     }
 
     override fun onDestroy() {

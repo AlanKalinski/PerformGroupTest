@@ -1,6 +1,7 @@
 package xyz.kalinski.perform.activities.main.fragments.standings
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.standings.adapter.StandingsAdapter
 import xyz.kalinski.perform.bases.BaseFragment
+import xyz.kalinski.perform.utils.snack
 import javax.inject.Inject
 
 class StandingsFragment : BaseFragment(), IStandingsView {
@@ -93,6 +95,10 @@ class StandingsFragment : BaseFragment(), IStandingsView {
 
     override fun showError() {
         hideProgressBar()
+        swiperefresh.snack(messageRes = R.string.error_message, length = Snackbar.LENGTH_LONG, f = {
+            requestForItems()
+            dismiss()
+        })
     }
 
     override fun onDestroy() {
