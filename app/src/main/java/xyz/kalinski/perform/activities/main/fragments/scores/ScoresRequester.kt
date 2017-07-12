@@ -7,12 +7,12 @@ import xyz.kalinski.perform.models.response.ResponseXml
 import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
-class ScoresRequester @Inject constructor(val api: PerformApi) {
+class ScoresRequester @Inject constructor(val api: PerformApi) : IScoresRequester {
 
     var request: Disposable? = null
     var xml: ResponseXml? = null
 
-    fun getScores(listener: IScoresPresenter.RequesterListener) {
+    override fun getScores(listener: IScoresPresenter.RequesterListener) {
         request = api.getScores()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -29,7 +29,7 @@ class ScoresRequester @Inject constructor(val api: PerformApi) {
                 )
     }
 
-    fun dispose() {
+    override fun dispose() {
         request?.dispose()
     }
 }

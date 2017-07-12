@@ -7,12 +7,12 @@ import xyz.kalinski.perform.models.response.ResponseXml
 import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
-class StandingsRequester @Inject constructor(val api: PerformApi) {
+class StandingsRequester @Inject constructor(val api: PerformApi) : IStandingsRequester {
 
     var request: Disposable? = null
     var xml: ResponseXml? = null
 
-    fun getStandings(listener: IStandingsPresenter.RequesterListener) {
+    override fun getStandings(listener: IStandingsPresenter.RequesterListener) {
         request = api.getStandings()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,7 +30,7 @@ class StandingsRequester @Inject constructor(val api: PerformApi) {
                 )
     }
 
-    fun dispose() {
+    override fun dispose() {
         request?.dispose()
     }
 }

@@ -9,12 +9,12 @@ import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
 @Module
-class NewsRequester @Inject constructor(val api: PerformApi) {
+class NewsRequester @Inject constructor(val api: PerformApi) : INewsRequester {
 
     var newsRss: NewsRss? = null
     var request: Disposable? = null
 
-    fun getLatestNews(listener: INewsPresenter.RequesterListener) {
+    override fun getLatestNews(listener: INewsPresenter.RequesterListener) {
         request = api.getLatestNews()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,7 +31,7 @@ class NewsRequester @Inject constructor(val api: PerformApi) {
                 )
     }
 
-    fun dispose() {
+    override fun dispose() {
         request?.dispose()
     }
 }

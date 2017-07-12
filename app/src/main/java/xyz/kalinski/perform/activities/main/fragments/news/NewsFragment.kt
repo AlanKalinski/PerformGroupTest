@@ -59,7 +59,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         swiperefresh.setOnRefreshListener { requestForItems() }
     }
 
-
     override fun requestForItems() {
         showProgressBar()
         presenter.getLatestNews()
