@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginEnd="@dimen/small_padding"
+    android:layout_marginLeft="@dimen/small_padding"
+    android:layout_marginRight="@dimen/small_padding"
+    android:layout_marginStart="@dimen/small_padding">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_padding"
-        android:padding="@dimen/small_padding">
+        android:padding="@dimen/small_padding"
+        app:cardCornerRadius="0dp"
+        app:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:id="@+id/content"
@@ -20,35 +25,18 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="@dimen/large_image_size"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/large_image_size"
+                android:background="@android:color/black"
                 android:contentDescription="@string/news_image_content_desc"
                 tools:layout_height="@dimen/large_image_size" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:padding="@dimen/small_padding"
-                    android:textSize="@dimen/smallest_text_size"
-                    tools:text="Category"/>
-
-            </FrameLayout>
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/image"
-                android:layout_alignBottom="@id/image"
-                android:layout_alignTop="@id/image"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
                 android:background="?android:attr/selectableItemBackground"
-                android:layout_toRightOf="@id/image">
+                android:padding="@dimen/small_padding">
 
                 <TextView
                     android:id="@+id/title"
@@ -75,11 +63,26 @@
                     android:layout_below="@id/description"
                     android:gravity="bottom"
                     android:textColor="?colorAccentDark"
-                    android:layout_alignParentBottom="true"
                     android:textSize="@dimen/small_text_size"
                     tools:text="Wednesday, 7 December 2011, 13:35" />
 
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/smallest_text_size"
+            tools:text="Category" />
+
+    </FrameLayout>
 </RelativeLayout>
