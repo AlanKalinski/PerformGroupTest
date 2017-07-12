@@ -3,23 +3,24 @@ package xyz.kalinski.perform.activities.main.fragments.standings
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
-import xyz.kalinski.perform.activities.main.fragments.scores.IScoresPresenter
+import xyz.kalinski.perform.models.response.ResponseXml
 import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
 class StandingsRequester @Inject constructor(val api: PerformApi) {
 
     var request: Disposable? = null
+    var xml: ResponseXml? = null
 
-    fun getStandings(listener: IScoresPresenter.RequesterListener) {
+    fun getStandings(listener: IStandingsPresenter.RequesterListener) {
         request = api.getStandings()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
                             standings ->
-                            listener.onItemsReceived(standings)
+                            xml = standings
+                            listener.onItemsReceived()
 
                         },
                         {
@@ -29,7 +30,7 @@ class StandingsRequester @Inject constructor(val api: PerformApi) {
                 )
     }
 
-    fun dispose(){
+    fun dispose() {
         request?.dispose()
     }
 }

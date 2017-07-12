@@ -1,11 +1,11 @@
 package xyz.kalinski.perform.activities.main.fragments.scores
-import xyz.kalinski.perform.models.response.ResponseXml
+
 import xyz.kalinski.perform.view.ViewType
-import java.util.ArrayList
+import java.util.*
 
 interface IScoresPresenter {
     interface RequesterListener {
-        fun onItemsReceived(xml: ResponseXml)
+        fun onItemsReceived()
         fun onError()
     }
 

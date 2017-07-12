@@ -1,13 +1,11 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
 import xyz.kalinski.perform.models.response.Item
-import xyz.kalinski.perform.models.response.NewsRss
 
 class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
     lateinit var requester: NewsRequester
     var view: INewsView? = null
-    var newsRss: NewsRss? = null
 
     override fun initRequester(requester: NewsRequester) {
         this.requester = requester
@@ -22,11 +20,10 @@ class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
     }
 
     override fun getNews(): ArrayList<Item>? {
-        return newsRss?.channel?.items
+        return requester.newsRss?.channel?.items
     }
 
-    override fun onItemsReceived(newsRss: NewsRss) {
-        this.newsRss = newsRss
+    override fun onItemsReceived() {
         view?.hideProgressBar()
         view?.notifyUpdate()
     }
@@ -37,6 +34,7 @@ class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
 
     override fun onDestroy() {
         view = null
-        newsRss = null
+        requester.dispose()
+        requester.newsRss = null
     }
 }

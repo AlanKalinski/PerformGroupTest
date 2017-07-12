@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_with_recycler.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
-import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.standings.adapter.StandingsAdapter
 import xyz.kalinski.perform.bases.BaseFragment
 import xyz.kalinski.perform.utils.snack
@@ -19,12 +18,6 @@ class StandingsFragment : BaseFragment(), IStandingsView {
 
     @Inject lateinit var presenter: IStandingsPresenter
     @Inject lateinit var requester: StandingsRequester
-
-    lateinit var iMainView: IMainView
-
-    override fun setMainView(view: IMainView) {
-        iMainView = view
-    }
 
     companion object {
         fun newInstance() = StandingsFragment()
@@ -48,15 +41,19 @@ class StandingsFragment : BaseFragment(), IStandingsView {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        initPresenter()
         initView()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initPresenter() {
+        presenter.initView(this)
+        presenter.initRequester(requester)
     }
 
     private fun initView() {
         initAdapter()
         initSwipeToRefresh()
-        presenter.initView(this)
-        presenter.initRequester(requester)
         requestForItems()
     }
 

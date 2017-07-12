@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_with_recycler.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
-import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.news.adapter.NewsAdapter
 import xyz.kalinski.perform.activities.webview.WebViewActivity
 import xyz.kalinski.perform.bases.BaseFragment
@@ -22,7 +21,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     @Inject lateinit var presenter: INewsPresenter
     @Inject lateinit var requester: NewsRequester
-    lateinit var iMainView: IMainView
 
     companion object {
         val NEWS_INTENT: String = "NEWS"
@@ -37,11 +35,6 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
         recyclerView
     }
 
-    override fun setMainView(view: IMainView) {
-        iMainView = view
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         PerformApplication.newsComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -52,15 +45,19 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        initPresenter()
         initView()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initPresenter() {
+        presenter.initView(this)
+        presenter.initRequester(requester)
     }
 
     private fun initView() {
         initAdapter()
         initSwipeToRefresh()
-        presenter.initView(this)
-        presenter.initRequester(requester)
         requestForItems()
     }
 

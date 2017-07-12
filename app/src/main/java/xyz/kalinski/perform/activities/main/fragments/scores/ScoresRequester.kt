@@ -3,12 +3,14 @@ package xyz.kalinski.perform.activities.main.fragments.scores
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import xyz.kalinski.perform.models.response.ResponseXml
 import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
 class ScoresRequester @Inject constructor(val api: PerformApi) {
 
     var request: Disposable? = null
+    var xml: ResponseXml? = null
 
     fun getScores(listener: IScoresPresenter.RequesterListener) {
         request = api.getScores()
@@ -17,7 +19,8 @@ class ScoresRequester @Inject constructor(val api: PerformApi) {
                 .subscribe(
                         {
                             scores ->
-                            listener.onItemsReceived(scores)
+                            xml = scores
+                            listener.onItemsReceived()
                         },
                         {
                             error ->
@@ -26,7 +29,7 @@ class ScoresRequester @Inject constructor(val api: PerformApi) {
                 )
     }
 
-    fun dispose(){
+    fun dispose() {
         request?.dispose()
     }
 }

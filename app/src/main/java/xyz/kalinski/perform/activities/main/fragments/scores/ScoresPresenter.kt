@@ -4,7 +4,6 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import xyz.kalinski.perform.models.ScoreHeader
-import xyz.kalinski.perform.models.response.ResponseXml
 import xyz.kalinski.perform.view.ViewType
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -14,7 +13,6 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
     lateinit var requester: ScoresRequester
 
     var view: IScoresView? = null
-    var xml: ResponseXml? = null
     var interval: Disposable? = null
 
     val REFRESH_INTERVAL = 30L
@@ -37,12 +35,12 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
     override fun getList(): ArrayList<ViewType> {
         val list = arrayListOf<ViewType>()
 
-        xml?.competition?.season?.round?.groupList?.size ?: return list
+        requester.xml?.competition?.season?.round?.groupList?.size ?: return list
 
         val dateSet = hashSetOf<ScoreHeader>()
 
-        for (i in 0..xml!!.competition!!.season!!.round!!.groupList!!.size - 1) {
-            val group = xml!!.competition!!.season!!.round!!.groupList!![i]
+        for (i in 0..requester.xml!!.competition!!.season!!.round!!.groupList!!.size - 1) {
+            val group = requester.xml!!.competition!!.season!!.round!!.groupList!![i]
             if (group.matchList != null) {
                 for (item in group.matchList!!) {
                     if (item.dateUtc != null) dateSet.add(ScoreHeader(item.dateUtc!!))
@@ -56,14 +54,13 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
     }
 
     override fun onDestroy() {
+        view = null
         interval?.dispose()
         requester.dispose()
-        view = null
-        xml = null
+        requester.xml = null
     }
 
-    override fun onItemsReceived(xml: ResponseXml) {
-        this.xml = xml
+    override fun onItemsReceived() {
         view?.hideProgressBar()
         view?.notifyUpdate()
     }

@@ -8,6 +8,7 @@ import xyz.kalinski.perform.di.modules.AppModule
 class PerformApplication : Application() {
 
     companion object {
+        lateinit var mainComponent: MainActivityComponent
         lateinit var newsComponent: FragmentNewsComponent
         lateinit var scoresComponent: FragmentScoresComponent
         lateinit var standingsComponent: FragmentStandingsComponent
@@ -20,6 +21,11 @@ class PerformApplication : Application() {
     }
 
     private fun setUpModules() {
+
+        mainComponent = DaggerMainActivityComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+
         newsComponent = DaggerFragmentNewsComponent.builder()
                 .appModule(AppModule(this))
                 .build()

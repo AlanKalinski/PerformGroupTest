@@ -3,6 +3,7 @@ package xyz.kalinski.perform.activities.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
 import xyz.kalinski.perform.activities.main.fragments.news.NewsFragment
 import xyz.kalinski.perform.activities.main.fragments.scores.ScoresFragment
@@ -10,24 +11,24 @@ import xyz.kalinski.perform.activities.main.fragments.standings.StandingsFragmen
 import xyz.kalinski.perform.bases.BaseActivity
 import xyz.kalinski.perform.bases.BaseFragment
 import xyz.kalinski.perform.utils.replace
+import javax.inject.Inject
 
 
-class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseActivity(), IMainView {
+class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseActivity() {
 
+    @Inject lateinit var presenter: IMainPresenter
     private lateinit var selectedFragment: BaseFragment
-    private var presenter: IMainPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = MainPresenter(this)
-        initFragment()
+        PerformApplication.mainComponent.inject(this)
+        initNewsFragment()
     }
 
-    private fun initFragment() {
+    private fun initNewsFragment() {
         selectedFragment = replace(R.id.fragment) {
             NewsFragment.newInstance()
         } as BaseFragment
-        selectedFragment.setMainView(this)
         supportActionBar?.title = getString(NewsFragment.getName())
     }
 
@@ -44,7 +45,6 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
                         selectedFragment = replace(R.id.fragment) {
                             NewsFragment.newInstance()
                         } as BaseFragment
-                        selectedFragment.setMainView(this)
                         supportActionBar?.title = getString(NewsFragment.getName())
                     }
                 }
@@ -55,7 +55,6 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
                         selectedFragment = replace(R.id.fragment) {
                             ScoresFragment.newInstance()
                         } as BaseFragment
-                        selectedFragment.setMainView(this)
                         supportActionBar?.title = getString(ScoresFragment.getName())
                     }
                 }
@@ -66,7 +65,6 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
                         selectedFragment = replace(R.id.fragment) {
                             StandingsFragment.newInstance()
                         } as BaseFragment
-                        selectedFragment.setMainView(this)
                         supportActionBar?.title = getString(StandingsFragment.getName())
                     }
                 }
@@ -76,7 +74,7 @@ class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseAc
     }
 
     override fun onDestroy() {
-        presenter?.onDestroy()
+        presenter.onDestroy()
         super.onDestroy()
     }
 }

@@ -1,8 +1,7 @@
 package xyz.kalinski.perform.activities.main
 
-internal class MainPresenter(private var view: IMainView?) : IMainPresenter {
+internal class MainPresenter : IMainPresenter {
 
     override fun onDestroy() {
-        view = null
     }
 }

@@ -1,6 +1,6 @@
 package xyz.kalinski.perform.activities.main
 
-internal interface IMainPresenter {
+interface IMainPresenter {
 
     fun onDestroy()
 }

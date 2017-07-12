@@ -1,15 +1,12 @@
 package xyz.kalinski.perform.activities.main.fragments.standings
 
-import xyz.kalinski.perform.activities.main.fragments.scores.IScoresPresenter
 import xyz.kalinski.perform.models.response.Ranking
-import xyz.kalinski.perform.models.response.ResponseXml
 
-class StandingsPresenter : IStandingsPresenter, IScoresPresenter.RequesterListener {
+class StandingsPresenter : IStandingsPresenter, IStandingsPresenter.RequesterListener {
 
     lateinit var requester: StandingsRequester
 
     var view: IStandingsView? = null
-    var xml: ResponseXml? = null
 
     override fun initView(view: IStandingsView) {
         this.view = view
@@ -24,17 +21,16 @@ class StandingsPresenter : IStandingsPresenter, IScoresPresenter.RequesterListen
     }
 
     override fun getList(): ArrayList<Ranking>? {
-        return xml?.competition?.season?.round?.resultTable?.rankingList
+        return requester.xml?.competition?.season?.round?.resultTable?.rankingList
     }
 
     override fun onDestroy() {
-        requester.dispose()
         view = null
-        xml = null
+        requester.dispose()
+        requester.xml = null
     }
 
-    override fun onItemsReceived(xml: ResponseXml) {
-        this.xml = xml
+    override fun onItemsReceived() {
         view?.hideProgressBar()
         view?.notifyUpdate()
     }

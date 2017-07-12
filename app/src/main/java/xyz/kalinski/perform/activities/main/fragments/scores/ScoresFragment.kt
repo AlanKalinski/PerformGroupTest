@@ -1,7 +1,6 @@
 package xyz.kalinski.perform.activities.main.fragments.scores
 
 import android.os.Bundle
-import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_with_recycler.*
 import xyz.kalinski.perform.PerformApplication
 import xyz.kalinski.perform.R
-import xyz.kalinski.perform.activities.main.IMainView
 import xyz.kalinski.perform.activities.main.fragments.scores.adapter.ScoresAdapter
 import xyz.kalinski.perform.bases.BaseFragment
 import xyz.kalinski.perform.utils.snack
@@ -20,12 +18,6 @@ class ScoresFragment : BaseFragment(), IScoresView {
 
     @Inject lateinit var presenter: IScoresPresenter
     @Inject lateinit var requester: ScoresRequester
-
-    lateinit var iMainView: IMainView
-
-    override fun setMainView(view: IMainView) {
-        iMainView = view
-    }
 
     companion object {
         fun newInstance() = ScoresFragment()
@@ -49,15 +41,19 @@ class ScoresFragment : BaseFragment(), IScoresView {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        initPresenter()
         initView()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initPresenter() {
+        presenter.initView(this)
+        presenter.initRequester(requester)
     }
 
     private fun initView() {
         initAdapter()
         initSwipeToRefresh()
-        presenter.initView(this)
-        presenter.initRequester(requester)
         requestForItems()
     }
 
