@@ -7,10 +7,9 @@ import xyz.kalinski.perform.models.ScoreHeader
 import xyz.kalinski.perform.view.ViewType
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
-
-    lateinit var requester: ScoresRequester
+class ScoresPresenter @Inject constructor(val requester: ScoresRequester) : IScoresPresenter, IScoresPresenter.RequesterListener {
 
     var view: IScoresView? = null
     var interval: Disposable? = null
@@ -19,10 +18,6 @@ class ScoresPresenter : IScoresPresenter, IScoresPresenter.RequesterListener {
 
     override fun initView(view: IScoresView) {
         this.view = view
-    }
-
-    override fun initRequester(requester: ScoresRequester) {
-        this.requester = requester
     }
 
     override fun getScores() {

@@ -1,19 +1,14 @@
 package xyz.kalinski.perform.activities.main.fragments.standings
 
 import xyz.kalinski.perform.models.response.Ranking
+import javax.inject.Inject
 
-class StandingsPresenter : IStandingsPresenter, IStandingsPresenter.RequesterListener {
-
-    lateinit var requester: StandingsRequester
+class StandingsPresenter @Inject constructor(val requester: StandingsRequester) : IStandingsPresenter, IStandingsPresenter.RequesterListener {
 
     var view: IStandingsView? = null
 
     override fun initView(view: IStandingsView) {
         this.view = view
-    }
-
-    override fun initRequester(requester: StandingsRequester) {
-        this.requester = requester
     }
 
     override fun getStandings() {

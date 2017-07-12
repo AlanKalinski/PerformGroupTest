@@ -41,14 +41,9 @@ class ScoresFragment : BaseFragment(), IScoresView {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        initPresenter()
+        presenter.initView(this)
         initView()
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun initPresenter() {
-        presenter.initView(this)
-        presenter.initRequester(requester)
     }
 
     private fun initView() {

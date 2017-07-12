@@ -20,7 +20,6 @@ import javax.inject.Inject
 class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     @Inject lateinit var presenter: INewsPresenter
-    @Inject lateinit var requester: NewsRequester
 
     companion object {
         val NEWS_INTENT: String = "NEWS"
@@ -45,14 +44,9 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        initPresenter()
+        presenter.initView(this)
         initView()
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun initPresenter() {
-        presenter.initView(this)
-        presenter.initRequester(requester)
     }
 
     private fun initView() {

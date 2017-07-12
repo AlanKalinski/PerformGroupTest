@@ -1,15 +1,11 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
 import xyz.kalinski.perform.models.response.Item
+import javax.inject.Inject
 
-class NewsPresenter : INewsPresenter, INewsPresenter.RequesterListener {
+class NewsPresenter @Inject constructor(val requester: NewsRequester) : INewsPresenter, INewsPresenter.RequesterListener {
 
-    lateinit var requester: NewsRequester
     var view: INewsView? = null
-
-    override fun initRequester(requester: NewsRequester) {
-        this.requester = requester
-    }
 
     override fun initView(view: INewsView) {
         this.view = view

@@ -1,5 +1,6 @@
 package xyz.kalinski.perform.activities.main.fragments.news
 
+import dagger.Module
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -7,6 +8,7 @@ import xyz.kalinski.perform.models.response.NewsRss
 import xyz.kalinski.perform.network.PerformApi
 import javax.inject.Inject
 
+@Module
 class NewsRequester @Inject constructor(val api: PerformApi) {
 
     var newsRss: NewsRss? = null

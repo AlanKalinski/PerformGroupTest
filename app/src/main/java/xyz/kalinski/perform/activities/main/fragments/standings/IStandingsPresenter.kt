@@ -9,7 +9,6 @@ interface IStandingsPresenter {
     }
 
     fun initView(view: IStandingsView)
-    fun initRequester(requester: StandingsRequester)
     fun getStandings()
     fun getList(): ArrayList<Ranking>?
     fun onDestroy()

@@ -10,7 +10,6 @@ interface IScoresPresenter {
     }
 
     fun initView(view: IScoresView)
-    fun initRequester(requester: ScoresRequester)
     fun getScores()
     fun getList(): ArrayList<ViewType>
     fun onDestroy()
