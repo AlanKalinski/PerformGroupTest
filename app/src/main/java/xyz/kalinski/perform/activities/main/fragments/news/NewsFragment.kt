@@ -23,6 +23,7 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
     lateinit var iMainView: IMainView
 
     companion object {
+        val NEWS_INTENT: String = "NEWS"
         fun newInstance() = NewsFragment()
         fun getName(): Int = R.string.news_fragment_title
     }
@@ -88,7 +89,7 @@ class NewsFragment : BaseFragment(), INewsView, (Item) -> Unit {
 
     override fun invoke(item: Item) {
         val intent = Intent(context, WebViewActivity::class.java)
-        intent.putExtra("URL", item.link)
+        intent.putExtra(NEWS_INTENT, item)
         startActivity(intent)
     }
 

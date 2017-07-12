@@ -16,7 +16,7 @@ import xyz.kalinski.perform.view.ViewType
 import xyz.kalinski.perform.view.ViewTypes
 
 
-class StandingsAdapter(var items: ArrayList<Ranking>) : RecyclerView.Adapter<ViewHolder>() {
+class StandingsAdapter(var items: List<Ranking>) : RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         if (position == 0) return
         else holder?.bind(items[position - 1], position)
@@ -62,7 +62,7 @@ class StandingsAdapter(var items: ArrayList<Ranking>) : RecyclerView.Adapter<Vie
                 changePosition.textColor = ContextCompat.getColor(context, R.color.red)
             } else {
                 changePosition.visibility = View.GONE
-                teamName.layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 7f)
+                teamName.layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 6f)
             }
 
             if (pos % 2 == 0) layout.backgroundColor = ContextCompat.getColor(context, R.color.scoresPrimaryColor)

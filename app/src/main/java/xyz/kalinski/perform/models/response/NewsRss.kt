@@ -4,6 +4,7 @@ import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
+import java.io.Serializable
 
 @Root(name = "rss", strict = false)
 data class NewsRss(
@@ -31,11 +32,11 @@ data class Item(
         @field:Element(name = "description") var description: String? = null,
         @field:Element(name = "link") var link: String? = null,
         @field:Element(name = "category") var category: String? = null
-)
+) : Serializable
 
 @Root(strict = false)
 data class Enclosure(
         @field:Attribute(name = "length") var length: Long? = null,
         @field:Attribute(name = "url") var url: String? = null,
         @field:Attribute(name = "type") var type: String? = null
-)
+) : Serializable
